@@ -8,35 +8,99 @@ Az év második felében izgalmas és hasznos dolgokat fogunk tanulni a JavaScri
 
    - **Spread operátor (`...`):** Ezzel az egyszerű jelöléssel könnyedén másolhatunk vagy kombinálhatunk tömböket és objektumokat. Például, ha két tömböt szeretnénk egyesíteni, a spread operátorral ezt egy sorban megtehetjük, anélkül hogy bonyolult ciklusokat írnánk.
 
-     **Példa előtte és utána:**
+### **Példa a Spread operátor használata nélkül (hagyományos módszerrel)**
 
-     *Előtte (tömbök egyesítése ciklusokkal):*
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread operátor nélküli példa</title>
+</head>
+<body>
+    <h1>Spread operátor nélküli példa</h1>
+    <button id="combineButton">Tömbök egyesítése</button>
+    <p id="result"></p>
 
-     ```javascript
-     const arr1 = [1, 2, 3];
-     const arr2 = [4, 5, 6];
-     const combined = [];
+    <script>
+        // Gombhoz való hozzáférés
+        var button = document.getElementById('combineButton');
+        var resultParagraph = document.getElementById('result');
 
-     for (let i = 0; i < arr1.length; i++) {
-       combined.push(arr1[i]);
-     }
+        // Eseménykezelő, amely tömböket egyesít
+        button.addEventListener('click', function() {
+            var arr1 = [1, 2, 3];
+            var arr2 = [4, 5, 6];
+            var combined = [];
 
-     for (let i = 0; i < arr2.length; i++) {
-       combined.push(arr2[i]);
-     }
+            // Tömbök egyesítése for ciklussal
+            for (var i = 0; i < arr1.length; i++) {
+                combined.push(arr1[i]);
+            }
 
-     console.log(combined); // [1, 2, 3, 4, 5, 6]
-     ```
+            for (var i = 0; i < arr2.length; i++) {
+                combined.push(arr2[i]);
+            }
 
-     *Utána (spread operátor használatával):*
+            resultParagraph.textContent = 'Egyesített tömb: ' + combined.join(', ');
+        });
+    </script>
+</body>
+</html>
+```
 
-     ```javascript
-     const arr1 = [1, 2, 3];
-     const arr2 = [4, 5, 6];
-     const combined = [...arr1, ...arr2];
+**Magyarázat:**
 
-     console.log(combined); // [1, 2, 3, 4, 5, 6]
-     ```
+- A `combineButton` gombra kattintva két tömböt egyesítünk egy ciklus segítségével.
+- A `for` ciklusokkal manuálisan adjuk hozzá a tömb elemeit az új, egyesített tömbhöz.
+
+### **Példa a Spread operátor használatával**
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread operátor példa</title>
+</head>
+<body>
+    <h1>Spread operátor példa</h1>
+    <button id="combineButton">Tömbök egyesítése</button>
+    <p id="result"></p>
+
+    <script>
+        // Gombhoz való hozzáférés
+        const button = document.getElementById('combineButton');
+        const resultParagraph = document.getElementById('result');
+
+        // Eseménykezelő, amely tömböket egyesít
+        button.addEventListener('click', () => {
+            const arr1 = [1, 2, 3];
+            const arr2 = [4, 5, 6];
+
+            // Spread operátor használata a tömbök egyesítésére
+            const combined = [...arr1, ...arr2];
+
+            resultParagraph.textContent = 'Egyesített tömb: ' + combined.join(', ');
+        });
+    </script>
+</body>
+</html>
+```
+
+**Magyarázat:**
+
+- A `combineButton` gombra kattintva a `spread operátor` (`...`) segítségével egyszerűen egyesítjük a két tömböt.
+- A spread operátorral sokkal rövidebb és tisztább a kód, mivel nem szükséges manuálisan átiterálni a tömb elemein.
+
+**Mi a különbség?**
+
+- **Hagyományos módszer:** Több soros kódot és `for` ciklust igényel a tömbök egyesítése, ami több hibalehetőséget is hordozhat.
+- **Spread operátor:** Könnyen és tömören egyesíthetjük a tömböket, ami nem csak olvashatóbbá, de karbantarthatóbbá is teszi a kódot.
+
+**Mindkét példát** másold be egy `.html` fájlba, és nyisd meg a böngészőben. A gombra kattintva mindkét változat egyesíti a két tömböt, de a spread operátor használata sokkal egyszerűbb és olvashatóbb kódot eredményez.
 
    - **Destrukturálás:** Ez a technika lehetővé teszi, hogy egy összetett objektumból vagy tömbből könnyedén kinyerjük a szükséges adatokat. Képzeljétek el, hogy van egy nagy objektumotok sok adattal, de nektek csak néhány értékre van szükségetek belőle. A destrukturálással ezt egyszerűen megtehetitek.
 
