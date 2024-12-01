@@ -95,7 +95,7 @@
 
 > 1. **A telefonhasználat az órák alatt tilos.** Ha valaki elővenné, először elveszem az óra végéig, másodjára az igazgatóhoz kerül. Azért kérem ezt, hogy mindenki a tanulásra tudjon koncentrálni.
 
-> 2. **Enni, inni lehet,** de ügyeljünk arra, hogy ne legyenek zsírosak vagy piszkosak a kezek, mert a gépeket mindannyian használjuk, és fontos, hogy tiszták maradjanak.
+> 2. **Evést azt lehetőség szerint kerüljük, inni lehet az órán?** de ügyeljünk arra, hogy ne legyenek zsírosak vagy piszkosak a kezek, mert a gépeket mindannyian használjuk, és fontos, hogy tiszták maradjanak.
 
 > 3. **Ha isztok, távolodjatok el a gépektől,** hogy elkerüljük a baleseteket. Egy kis figyelem sok kellemetlenséget megelőz.
 
