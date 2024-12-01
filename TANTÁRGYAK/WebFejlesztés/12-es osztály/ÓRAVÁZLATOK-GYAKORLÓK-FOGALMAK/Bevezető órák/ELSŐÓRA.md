@@ -8,7 +8,7 @@
 >"Osszatok meg velem az alábbi négy információt röviden:
   1. Mi a keresztneved?
   2. Mi az, amit szeretsz csinálni szabadidődben?
-  3. Mi az, amit vársz ettől a webprogramozás órától?
+  3. Van-e, ami érdekli különösen a webprogramozáson belül?
   4. Milyen területen szeretnél továbbtanulni vagy dolgozni a jövőben?"
 >"Köszönöm szépen, hogy megosztottátok ezeket! Nagyon érdekes lesz látni, hogy milyen különböző céljaink és érdeklődési területeink vannak."
 
