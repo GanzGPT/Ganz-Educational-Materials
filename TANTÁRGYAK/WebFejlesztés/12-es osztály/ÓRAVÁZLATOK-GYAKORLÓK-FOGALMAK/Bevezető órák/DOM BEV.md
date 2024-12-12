@@ -583,3 +583,23 @@ ez az egész beszélgetést átírod egy nagy mardown formátumba?
     </script>
 </body>
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Egyszerű setTimeout Példa</title>
+</head>
+<body>
+    <h1 id="title"></h1>
+
+    <script>
+        // 5 másodperc múlva (5000 ms) a callback-ben megváltoztatjuk a h1 szövegét
+        setTimeout(function() {
+            document.getElementById('title').textContent = "Letelt az idő!";
+        }, 5000);
+    </script>
+</body>
+</html>
