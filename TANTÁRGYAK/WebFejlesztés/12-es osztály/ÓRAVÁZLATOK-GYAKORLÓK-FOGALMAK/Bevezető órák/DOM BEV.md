@@ -439,3 +439,75 @@ ez az egész beszélgetést átírod egy nagy mardown formátumba?
 **Asszisztens:**  
 *(A kért teljes beszélgetés már Markdown formátumban volt leírva, így a fenti szövegből készült a teljes Markdown változat. Ez a teljes beszélgetés itt.)*
 ```
+
+
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Visszaszámlálás SetTimeout-tal</title>
+    <style>
+        /* Csak egy egyszerű stílus a számlálóhoz */
+        #counter {
+            font-size: 2em; /* Nagyobb betűméret a számlálóhoz */
+            margin: 20px 0; /* Egy kis függőleges térköz */
+        }
+    </style>
+</head>
+<body>
+    <h1>Visszaszámlálás</h1>
+    <p>Kattints a gombra az 5 másodperces visszaszámlálás elindításához!</p>
+    <!-- Ez a gomb indítja el a visszaszámlálást -->
+    <button id="startBtn">Indítás</button>
+    <!-- Ebben a div-ben fog megjelenni a visszaszámláló értéke és a "Idő lejárt!" üzenet -->
+    <div id="counter"></div>
+
+    <script>
+        // Lekérjük a HTML elemeket JavaScript változókba.
+        const startBtn = document.getElementById('startBtn');
+        const counterDiv = document.getElementById('counter');
+        
+        // A timeLeft változóban tároljuk, hány másodperc van hátra.
+        // Kezdetben 5 másodperces visszaszámlálást állítunk be.
+        let timeLeft = 5;
+
+        /**
+         * Ez a függvény végzi a visszaszámlálást.
+         * 1. Megjeleníti az aktuális hátralévő időt a counterDiv-ben.
+         * 2. Ellenőrzi, hogy timeLeft nagyobb-e mint 0.
+         *    - Ha igen: timeLeft-et csökkenti 1-gyel, majd 1 másodperc után újra meghívja magát setTimeout-tal.
+         *    - Ha nem (tehát elérte a 0-t): még vár 1 másodpercet, majd "Idő lejárt!" feliratot ír ki.
+         */
+        function countdown() {
+            // Kiírjuk a jelenlegi értéket a div-be
+            counterDiv.textContent = timeLeft;
+            
+            // Ha még nem értük el a 0-t, folytatjuk a visszaszámlálást
+            if (timeLeft > 0) {
+                // Minden hívás után csökkentjük 1-gyel az időt
+                timeLeft--;
+
+                // A setTimeout segítségével 1 másodperc múlva újra meghívjuk a countdown függvényt.
+                // Ezzel biztosítjuk, hogy másodpercenként frissüljön az érték.
+                setTimeout(countdown, 1000);
+            } else {
+                // Ha elérte a 0-t, nem csökkentjük tovább, hanem 1 másodpercet várunk,
+                // majd kiírjuk, hogy "Idő lejárt!".
+                setTimeout(() => {
+                    counterDiv.textContent = "Idő lejárt!";
+                }, 1000);
+            }
+        }
+
+        // Ha a start gombra kattintunk, elindítjuk a visszaszámlálást.
+        // Először a timeLeft értékét újra 5-re állítjuk, hogy ha többször is megnyomják a gombot,
+        // akkor mindig friss visszaszámlálás induljon.
+        startBtn.addEventListener('click', () => {
+            timeLeft = 5;  // timeLeft visszaállítása 5-re
+            countdown();   // A visszaszámlálás elindítása
+        });
+    </script>
+</body>
+</html>
