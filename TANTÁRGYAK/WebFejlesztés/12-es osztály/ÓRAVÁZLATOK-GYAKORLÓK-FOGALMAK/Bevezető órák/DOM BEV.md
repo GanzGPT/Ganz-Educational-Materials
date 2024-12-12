@@ -539,3 +539,47 @@ ez az egész beszélgetést átírod egy nagy mardown formátumba?
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Egyszerű setTimeout Példa</title>
+    <style>
+        #message {
+            font-size: 1.5em;
+            color: blue;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1em;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Egyszerű setTimeout Példa</h1>
+    <p>Kattints a gombra, majd várj 3 másodpercet!</p>
+
+    <button id="startBtn">Indítás</button>
+    <div id="message"></div>
+
+    <script>
+        var startBtn = document.getElementById('startBtn');
+        var messageDiv = document.getElementById('message');
+
+        // Ez a függvény 3 másodperc után fog lefutni,
+        // miután a felhasználó megnyomta az "Indítás" gombot.
+        function showMessage() {
+            messageDiv.textContent = "3 másodperc eltelt, itt az üzenet!";
+        }
+
+        // Ha a gombot megnyomják, elindítjuk a késleltetést
+        startBtn.addEventListener('click', function() {
+            messageDiv.textContent = "Várj 3 másodpercet...";
+            setTimeout(showMessage, 3000); // 3000 ms = 3 másodperc
+        });
+    </script>
+</body>
+</html>
