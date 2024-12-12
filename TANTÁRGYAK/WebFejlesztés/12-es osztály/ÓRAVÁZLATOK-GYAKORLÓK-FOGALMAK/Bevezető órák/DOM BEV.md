@@ -511,3 +511,31 @@ ez az egész beszélgetést átírod egy nagy mardown formátumba?
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Közepes példa</title>
+</head>
+<body>
+    <h1>SetTimeout Közepes Feladat</h1>
+    <button id="startBtn">Indítás</button>
+    <div id="message"></div>
+    
+    <script>
+        const btn = document.getElementById('startBtn');
+        const messageDiv = document.getElementById('message');
+        
+        btn.addEventListener('click', () => {
+            btn.disabled = true; // Ne lehessen többször klikkelni
+            messageDiv.textContent = "Várj 5 másodpercet...";
+            
+            setTimeout(() => {
+                messageDiv.textContent = "Hello, 5 másodperccel később!";
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
