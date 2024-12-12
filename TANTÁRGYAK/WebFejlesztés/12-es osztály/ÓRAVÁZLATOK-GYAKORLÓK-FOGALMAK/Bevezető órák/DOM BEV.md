@@ -603,3 +603,25 @@ ez az egész beszélgetést átírod egy nagy mardown formátumba?
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Egyszerű setInterval Példa</title>
+</head>
+<body>
+    <h1 id="title">0</h1>
+
+    <script>
+        // Másodpercenként (1000 ms) növeljük a számot és írjuk a h1-be
+        var count = 0;
+        setInterval(function() {
+            count = count + 1;
+            document.getElementById('title').textContent = count;
+        }, 1000);
+    </script>
+</body>
+</html>
+
