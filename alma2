@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Egyszerű Visszaszámláló setTimeout-tal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #countdown {
+            font-size: 3em;
+            color: #333;
+            margin: 20px 0;
+        }
+        button {
+            font-size: 1em;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Egyszerű Visszaszámláló</h1>
+    <!-- A visszaszámláló kijelzője -->
+    <h1 id="countdown">5</h1>
+    
+    <!-- Indítás gomb -->
+    <button id="startBtn">Indítás</button>
+
+    <script>
+        // Lekérjük a gombot és a visszaszámláló kijelzőjét a DOM-ból
+        var startButton = document.getElementById('startBtn');
+        var countdownElement = document.getElementById('countdown');
+
+        // Eseménykezelő a gombhoz
+        startButton.addEventListener('click', function() {
+            // Kezdőérték beállítása (5 másodperc)
+            var timeLeft = 5;
+            countdownElement.textContent = timeLeft; // Megjelenítjük az aktuális értéket
+
+            // Függvény a visszaszámlálás kezelésére
+            function updateCountdown() {
+                timeLeft--; // Csökkentjük az időt egyel
+
+                if (timeLeft > 0) {
+                    countdownElement.textContent = timeLeft; // Frissítjük a kijelzőt az aktuális értékkel
+                    // 1 másodperc múlva újra meghívjuk ezt a függvényt
+                    setTimeout(updateCountdown, 1000);
+                } else {
+                    countdownElement.textContent = "Letelt az idő!"; // Megjelenítjük az üzenetet
+                }
+            }
+
+            // Az első késleltetett hívás beállítása (1 másodperc)
+            setTimeout(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
