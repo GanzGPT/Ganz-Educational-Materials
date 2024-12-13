@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Számláló Példa clearInterval Gombbal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #counter {
+            font-size: 3em;
+            margin: 20px 0;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #finalMessage {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Számláló Példa</h1>
+    <div id="counter">0</div>
+    <button id="startBtn">Számláló Indítása</button>
+    <button id="stopBtn">Számláló Leállítása</button>
+    <div id="finalMessage"></div>
+
+    <script>
+        // 1. HTML elemek lekérése
+        const counterElement = document.getElementById('counter');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const finalMessageElement = document.getElementById('finalMessage');
+
+        let count = 0; // Kezdő érték
+        let intervalId = null; // Az időzítő azonosítója
+
+        /**
+         * 2. Számláló indítása
+         */
+        function startCounter() {
+            // Ellenőrizzük, hogy már fut-e a számláló
+            if (intervalId !== null) {
+                alert("A számláló már fut!");
+                return;
+            }
+
+            // setInterval használata a számláló növelésére minden másodpercben
+            intervalId = setInterval(function() {
+                count += 1;
+                counterElement.textContent = count;
+            }, 1000); // 1000 ms = 1 másodperc
+
+            finalMessageElement.textContent = ""; // Üzenet törlése indításkor
+        }
+
+        /**
+         * 3. Számláló leállítása
+         */
+        function stopCounter() {
+            if (intervalId === null) {
+                alert("A számláló nincs elindítva!");
+                return;
+            }
+
+            clearInterval(intervalId); // setInterval leállítása
+            intervalId = null; // Időzítő azonosító visszaállítása
+
+            finalMessageElement.textContent = "A számlálás leállt!";
+        }
+
+        /**
+         * 4. Eseménykezelők hozzárendelése a gombokhoz
+         */
+        startBtn.addEventListener('click', startCounter);
+        stopBtn.addEventListener('click', stopCounter);
+    </script>
+</body>
+</html>
