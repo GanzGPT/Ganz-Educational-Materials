@@ -1,0 +1,453 @@
+Rendben, az alábbiakban bemutatok hat különböző JavaScript DOM **selector** (kiválasztó) függvényt, mindegyikhez egy egyszerű HTML példát. Minden példában:
+
+- **Felirat (Cím)**: Megnevezi, melyik selector függvényről van szó.
+- **HTML Elemmel**: Olyan elemeket tartalmaz, amelyeket a selector kiválaszt.
+- **Gomb**: Amire kattintva a selector működik és végrehajt egy műveletet.
+- **Demonstráció**: A gomb megnyomására végrehajtott egyszerű művelet, amely megmutatja a selector működését.
+- **Kommentek**: Részletes magyarázat a kód működéséről és az egyes részek hivatalos nevéről.
+
+### Teljes HTML Példa
+
+Az alábbi kódot másold be egy `index.html` fájlba, majd nyisd meg a böngészőben. Minden szekció külön bemutatót tartalmaz a selector függvények használatáról.
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Selector Függvények Példák</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .section h2 {
+            margin-top: 0;
+        }
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Selector Függvények Példák</h1>
+
+    <!-- 1. getElementById() Példa -->
+    <div class="section">
+        <h2>1. getElementById()</h2>
+        <p id="paragraph1">Ez egy bekezdés, amelyet <span class="highlight">getElementById</span> segítségével választunk ki.</p>
+        <button id="btn1">Szín megváltoztatása</button>
+        <script>
+            // Lekérjük a gombot és a célelemeket
+            var button1 = document.getElementById('btn1');
+            var paragraph1 = document.getElementById('paragraph1');
+
+            // Eseménykezelő a gombhoz
+            button1.addEventListener('click', function() {
+                // Megváltoztatjuk a bekezdés színét pirosra
+                paragraph1.style.color = 'red';
+            });
+        </script>
+    </div>
+
+    <!-- 2. getElementsByClassName() Példa -->
+    <div class="section">
+        <h2>2. getElementsByClassName()</h2>
+        <p class="highlight">Első bekezdés, amelyet <span class="highlight">getElementsByClassName</span> segítségével választunk ki.</p>
+        <p class="highlight">Második bekezdés ugyanazzal az osztállyal.</p>
+        <button id="btn2">Háttérszín megváltoztatása</button>
+        <script>
+            // Lekérjük a gombot és az összes elemet az adott osztállyal
+            var button2 = document.getElementById('btn2');
+            var elements2 = document.getElementsByClassName('highlight');
+
+            // Eseménykezelő a gombhoz
+            button2.addEventListener('click', function() {
+                // Végigiterálunk az elemeket és megváltoztatjuk a háttérszínüket
+                for (var i = 0; i < elements2.length; i++) {
+                    elements2[i].style.backgroundColor = 'yellow';
+                }
+            });
+        </script>
+    </div>
+
+    <!-- 3. getElementsByTagName() Példa -->
+    <div class="section">
+        <h2>3. getElementsByTagName()</h2>
+        <div>Első div, amelyet <span class="highlight">getElementsByTagName</span> segítségével választunk ki.</div>
+        <div>Második div ugyanazzal a címkével.</div>
+        <button id="btn3">Betűméret növelése</button>
+        <script>
+            // Lekérjük a gombot és az összes div-et
+            var button3 = document.getElementById('btn3');
+            var divs3 = document.getElementsByTagName('div');
+
+            // Eseménykezelő a gombhoz
+            button3.addEventListener('click', function() {
+                // Végigiterálunk a div-eken és növeljük a betűméretüket
+                for (var i = 0; i < divs3.length; i++) {
+                    var currentSize = window.getComputedStyle(divs3[i], null).getPropertyValue('font-size');
+                    var newSize = parseFloat(currentSize) + 2;
+                    divs3[i].style.fontSize = newSize + 'px';
+                }
+            });
+        </script>
+    </div>
+
+    <!-- 4. getElementsByName() Példa -->
+    <div class="section">
+        <h2>4. getElementsByName()</h2>
+        <form>
+            <input type="radio" name="colorChoice" value="red"> Piros<br>
+            <input type="radio" name="colorChoice" value="green"> Zöld<br>
+            <input type="radio" name="colorChoice" value="blue"> Kék<br>
+        </form>
+        <button id="btn4">Választás megjelölése</button>
+        <script>
+            // Lekérjük a gombot és az összes input elemet a "colorChoice" névvel
+            var button4 = document.getElementById('btn4');
+            var inputs4 = document.getElementsByName('colorChoice');
+
+            // Eseménykezelő a gombhoz
+            button4.addEventListener('click', function() {
+                // Megjelöljük az összes rádiógombot
+                for (var i = 0; i < inputs4.length; i++) {
+                    inputs4[i].checked = true;
+                }
+            });
+        </script>
+    </div>
+
+    <!-- 5. querySelector() Példa -->
+    <div class="section">
+        <h2>5. querySelector()</h2>
+        <p class="info">Első információs bekezdés.</p>
+        <p>Második bekezdés, amely ki lesz emelve.</p>
+        <button id="btn5">Szöveg módosítása</button>
+        <script>
+            // Lekérjük a gombot és az első bekezdést, ami a "p.info" szelektorral van kiválasztva
+            var button5 = document.getElementById('btn5');
+            var firstInfoParagraph = document.querySelector('p.info');
+
+            // Eseménykezelő a gombhoz
+            button5.addEventListener('click', function() {
+                // Megváltoztatjuk a bekezdés szövegét
+                firstInfoParagraph.textContent = "Ez az első bekezdés módosítva lett!";
+            });
+        </script>
+    </div>
+
+    <!-- 6. querySelectorAll() Példa -->
+    <div class="section">
+        <h2>6. querySelectorAll()</h2>
+        <ul>
+            <li class="item">Első listaelem</li>
+            <li class="item">Második listaelem</li>
+            <li class="item">Harmadik listaelem</li>
+        </ul>
+        <button id="btn6">Listaelemek kiemelése</button>
+        <script>
+            // Lekérjük a gombot és az összes listaelemet, amelyek az "item" osztályba tartoznak
+            var button6 = document.getElementById('btn6');
+            var listItems6 = document.querySelectorAll('li.item');
+
+            // Eseménykezelő a gombhoz
+            button6.addEventListener('click', function() {
+                // Végigiterálunk az összes listaelemen és megváltoztatjuk a háttérszínüket
+                listItems6.forEach(function(item) {
+                    item.style.backgroundColor = 'lightblue';
+                });
+            });
+        </script>
+    </div>
+
+</body>
+</html>
+```
+
+### Részletes Magyarázat
+
+Minden szekcióban egy adott selector függvény működését mutatjuk be. Lássuk mindegyiket részletesebben:
+
+---
+
+#### 1. `getElementById()`
+
+**Leírás:**
+A `getElementById()` függvény egyetlen DOM elemet választ ki a dokumentumból az egyedi **ID** alapján.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>1. getElementById()</h2>
+    <p id="paragraph1">Ez egy bekezdés, amelyet <span class="highlight">getElementById</span> segítségével választunk ki.</p>
+    <button id="btn1">Szín megváltoztatása</button>
+    <script>
+        // Lekérjük a gombot és a célelemeket
+        var button1 = document.getElementById('btn1'); // ID alapján választjuk ki a gombot
+        var paragraph1 = document.getElementById('paragraph1'); // ID alapján választjuk ki a bekezdést
+
+        // Eseménykezelő a gombhoz
+        button1.addEventListener('click', function() {
+            // Megváltoztatjuk a bekezdés színét pirosra
+            paragraph1.style.color = 'red';
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.getElementById('btn1')`: Kiválasztja a gombot, amelynek ID-je `btn1`.
+   - `document.getElementById('paragraph1')`: Kiválasztja a bekezdést, amelynek ID-je `paragraph1`.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button1`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, a bekezdés (`paragraph1`) szövegének színe pirosra változik.
+
+---
+
+#### 2. `getElementsByClassName()`
+
+**Leírás:**
+A `getElementsByClassName()` függvény visszaad egy HTMLCollection-t, amely az összes olyan elemet tartalmazza, amelyek rendelkeznek a megadott **osztálynévvel**.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>2. getElementsByClassName()</h2>
+    <p class="highlight">Első bekezdés, amelyet <span class="highlight">getElementsByClassName</span> segítségével választunk ki.</p>
+    <p class="highlight">Második bekezdés ugyanazzal az osztállyal.</p>
+    <button id="btn2">Háttérszín megváltoztatása</button>
+    <script>
+        // Lekérjük a gombot és az összes elemet az adott osztállyal
+        var button2 = document.getElementById('btn2'); // Gomb kiválasztása ID alapján
+        var elements2 = document.getElementsByClassName('highlight'); // Elek kiválasztása osztály alapján
+
+        // Eseménykezelő a gombhoz
+        button2.addEventListener('click', function() {
+            // Végigiterálunk az elemeket és megváltoztatjuk a háttérszínüket
+            for (var i = 0; i < elements2.length; i++) {
+                elements2[i].style.backgroundColor = 'yellow'; // Háttérszín megváltoztatása
+            }
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.getElementsByClassName('highlight')`: Kiválasztja az összes elemet, amelynek az osztályneve `highlight`.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button2`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, az összes kiválasztott elem (`elements2`) háttérszíne sárgára változik.
+
+---
+
+#### 3. `getElementsByTagName()`
+
+**Leírás:**
+A `getElementsByTagName()` függvény visszaad egy HTMLCollection-t, amely az összes olyan elemet tartalmazza, amelyeknek a megadott **címkéje** (tag neve) van.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>3. getElementsByTagName()</h2>
+    <div>Első div, amelyet <span class="highlight">getElementsByTagName</span> segítségével választunk ki.</div>
+    <div>Második div ugyanazzal a címkével.</div>
+    <button id="btn3">Betűméret növelése</button>
+    <script>
+        // Lekérjük a gombot és az összes div-et
+        var button3 = document.getElementById('btn3'); // Gomb kiválasztása ID alapján
+        var divs3 = document.getElementsByTagName('div'); // Elek kiválasztása címke alapján
+
+        // Eseménykezelő a gombhoz
+        button3.addEventListener('click', function() {
+            // Végigiterálunk a div-eken és növeljük a betűméretüket
+            for (var i = 0; i < divs3.length; i++) {
+                var currentSize = window.getComputedStyle(divs3[i], null).getPropertyValue('font-size'); // Aktuális betűméret lekérdezése
+                var newSize = parseFloat(currentSize) + 2; // Új betűméret kiszámítása
+                divs3[i].style.fontSize = newSize + 'px'; // Betűméret megváltoztatása
+            }
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.getElementsByTagName('div')`: Kiválasztja az összes `<div>` elemet a dokumentumból.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button3`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, az összes `<div>` elem betűmérete 2 pixel növekedéssel változik.
+
+---
+
+#### 4. `getElementsByName()`
+
+**Leírás:**
+A `getElementsByName()` függvény visszaad egy NodeList-et, amely az összes olyan elemet tartalmazza, amelyeknek a megadott **name** attribútuma van.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>4. getElementsByName()</h2>
+    <form>
+        <input type="radio" name="colorChoice" value="red"> Piros<br>
+        <input type="radio" name="colorChoice" value="green"> Zöld<br>
+        <input type="radio" name="colorChoice" value="blue"> Kék<br>
+    </form>
+    <button id="btn4">Választás megjelölése</button>
+    <script>
+        // Lekérjük a gombot és az összes input elemet a "colorChoice" névvel
+        var button4 = document.getElementById('btn4'); // Gomb kiválasztása ID alapján
+        var inputs4 = document.getElementsByName('colorChoice'); // Elek kiválasztása name alapján
+
+        // Eseménykezelő a gombhoz
+        button4.addEventListener('click', function() {
+            // Megjelöljük az összes rádiógombot
+            for (var i = 0; i < inputs4.length; i++) {
+                inputs4[i].checked = true; // Bejelöljük a rádiógombot
+            }
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.getElementsByName('colorChoice')`: Kiválasztja az összes elemet, amelyeknek a `name` attribútuma `colorChoice`.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button4`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, az összes rádiógomb (`input4`) bejelölt (`checked`) állapotba kerül.
+
+---
+
+#### 5. `querySelector()`
+
+**Leírás:**
+A `querySelector()` függvény visszaadja az első olyan elemet, amely megfelel a megadott **CSS-szelektornak**.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>5. querySelector()</h2>
+    <p class="info">Első információs bekezdés.</p>
+    <p>Második bekezdés, amely ki lesz emelve.</p>
+    <button id="btn5">Szöveg módosítása</button>
+    <script>
+        // Lekérjük a gombot és az első információs bekezdést
+        var button5 = document.getElementById('btn5'); // Gomb kiválasztása ID alapján
+        var firstInfoParagraph = document.querySelector('p.info'); // Első p.info elem kiválasztása CSS szelektorral
+
+        // Eseménykezelő a gombhoz
+        button5.addEventListener('click', function() {
+            // Megváltoztatjuk a bekezdés szövegét
+            firstInfoParagraph.textContent = "Ez az első bekezdés módosítva lett!";
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.querySelector('p.info')`: Kiválasztja az első `<p>` elemet, amelynek osztálya `info`.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button5`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, az első információs bekezdés (`firstInfoParagraph`) szövege módosul.
+
+---
+
+#### 6. `querySelectorAll()`
+
+**Leírás:**
+A `querySelectorAll()` függvény visszaad egy NodeList-et, amely az összes olyan elemet tartalmazza, amelyek megfelelnek a megadott **CSS-szelektornak**.
+
+**Példa Kód:**
+
+```html
+<div class="section">
+    <h2>6. querySelectorAll()</h2>
+    <ul>
+        <li class="item">Első listaelem</li>
+        <li class="item">Második listaelem</li>
+        <li class="item">Harmadik listaelem</li>
+    </ul>
+    <button id="btn6">Listaelemek kiemelése</button>
+    <script>
+        // Lekérjük a gombot és az összes listaelemet az "item" osztállyal
+        var button6 = document.getElementById('btn6'); // Gomb kiválasztása ID alapján
+        var listItems6 = document.querySelectorAll('li.item'); // Minden li.item elem kiválasztása
+
+        // Eseménykezelő a gombhoz
+        button6.addEventListener('click', function() {
+            // Végigiterálunk az összes listaelemen és megváltoztatjuk a háttérszínüket
+            listItems6.forEach(function(item) {
+                item.style.backgroundColor = 'lightblue'; // Háttérszín megváltoztatása
+            });
+        });
+    </script>
+</div>
+```
+
+**Működés:**
+
+1. **HTML Elemen kiválasztás:**
+   - `document.querySelectorAll('li.item')`: Kiválasztja az összes `<li>` elemet, amelyeknek az osztálya `item`.
+
+2. **Eseménykezelő hozzáadása:**
+   - A gombhoz (`button6`) kattintás esemény (`click`) van társítva.
+   - Amikor a gombra kattintasz, az összes kiválasztott listaelem (`listItems6`) háttérszíne világoskék (`lightblue`) lesz.
+
+---
+
+### Összefoglalás
+
+**Selector Függvények:**
+
+1. **`getElementById()`**: Egyedi ID alapján választ ki egyetlen elemet.
+2. **`getElementsByClassName()`**: Osztálynév alapján választ ki több elemet.
+3. **`getElementsByTagName()`**: Címke neve alapján választ ki több elemet.
+4. **`getElementsByName()`**: `name` attribútum alapján választ ki több elemet.
+5. **`querySelector()`**: CSS-szelektor alapján választ ki egyetlen elemet (az első találatot).
+6. **`querySelectorAll()`**: CSS-szelektor alapján választ ki több elemet.
+
+**Hivatalos Nevek:**
+
+- **Selector**: Kiválasztó függvények, amelyek segítségével elemeket érhetünk el a DOM-ból.
+- **DOM (Document Object Model)**: A HTML dokumentum struktúrájának objektum-alapú reprezentációja, amelyen keresztül a JavaScript interakcióba léphet az oldallal.
+
+**Használt CSS Szelektorok:**
+
+- `p.info`: Olyan `<p>` elem, amelynek osztálya `info`.
+- `li.item`: Olyan `<li>` elem, amelynek osztálya `item`.
+
+Ezek a példák segítenek megérteni és gyakorolni a különböző selector függvények használatát a JavaScript-ben. Kísérletezz velük, módosítsd a kódokat, és figyeld meg, hogyan változik a HTML tartalma a gombok megnyomásakor!
